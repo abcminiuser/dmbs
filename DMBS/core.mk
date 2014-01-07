@@ -80,8 +80,8 @@ PRINTABLE_DMBS_PROVIDED_MACROS = $(call CONVERT_TO_PRINTABLE, $(SORTED_DMBS_PROV
 
 help:
 	@echo "==================================================================="
-	@echo "                       DMBS Build System 2.0                       "
-	@echo "      (C) Dean Camera, 2014 { dean @ fourwalledcubicle . com }     "
+	@echo "                       The DMBS Build System                       "
+	@echo "      By Dean Camera, 2014 { dean @ fourwalledcubicle . com }      "
 	@echo "==================================================================="
 	@echo "DESCRIPTION:                                                       "
 	@echo " This build system is a set of makefile modules for (GNU) Make, to "
@@ -132,7 +132,7 @@ help:
 	@printf " %b" "$(PRINTABLE_DMBS_PROVIDED_MACROS:%=   - %\n)"
 	@echo "                                                                   "
 	@echo "==================================================================="
-	@echo "   The DMBS BuildSystem $(DMBS_VERSION) - Powered By Duct Tape (TM)"
+	@echo "          The DMBS Build System $(DMBS_VERSION) - Making MAKE easier."
 	@echo "==================================================================="
 
 # Lists build modules included by the project makefile, in alphabetical order
