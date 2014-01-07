@@ -15,6 +15,61 @@ This aims to replace the old WinAVR "mfile" makefile template, giving better
 functionality and much simpler user makefiles.
 
 
+Benefits:
+----------------
+
+Apart from much simpler, cleaner makefiles DMBS carries the aim of making the
+process of troubleshooting build issues a little easier. Lots can go wrong, so
+DMBS tries to sanity check its inputs wherever possible, and produce
+human-readable error messages. Forgotten to set a variable? Get a
+`Makefile {X} value not set.` message, rather than a possibly unrelated message.
+Have the wrong filename? See `Source file does not exist: {X}` rather than the
+infamous `No rule to make target {X}` message.
+
+
+Use:
+----------------
+
+A template user makefile is provided in the `Template` directory. DMBS modules
+are included via a GNU Make `include` directive. While the DMBS `core` module is
+always required, you can pick and choose what other modules you wish to add to
+your user project.
+
+Here's an example user makefile:
+
+	MCU          = atmega128
+	ARCH         = AVR8
+	F_CPU        = 8000000
+	OPTIMIZATION = s
+	TARGET       = Template
+	SRC          = $(TARGET).c
+	CC_FLAGS     =
+	LD_FLAGS     =
+
+	# Default target
+	all:
+
+	# Include DMBS build script makefiles
+	DMBS_PATH   ?= ../DMBS
+	include $(DMBS_PATH)/core.mk
+	include $(DMBS_PATH)/gcc.mk
+	include $(DMBS_PATH)/cppcheck.mk
+	include $(DMBS_PATH)/doxygen.mk
+	include $(DMBS_PATH)/dfu.mk
+	include $(DMBS_PATH)/hid.mk
+	include $(DMBS_PATH)/avrdude.mk
+	include $(DMBS_PATH)/atprogram.mk
+
+Each DMBS module can optionally supply one or more Make variables and macros,
+which you can reference in your user makefile. Additionally, modules can require
+one or more variables to be set by the user makefile, with (in some cases) sane
+defaults used if left out.
+
+As modules are added, you can get a list of available targets by simply typing
+`make help` from the command line. This will produce a formatted list of targets
+as well as mandatory and optional variables and exposed variables and macros.
+
+
 License
 ----------------
 
