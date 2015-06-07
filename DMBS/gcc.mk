@@ -172,11 +172,9 @@ DEPENDENCY_FILES := $(OBJECT_FILES:%.o=%.d)
 
 # Create a list of common flags to pass to the compiler/linker/assembler
 BASE_CC_FLAGS    := -pipe -g$(DEBUG_FORMAT) -g$(DEBUG_LEVEL)
-ifeq ($(ARCH), AVR8)
+ifneq ($(findstring $(ARCH), AVR8 XMEGA),)
    BASE_CC_FLAGS += -mmcu=$(MCU) -fshort-enums -fno-inline-small-functions -fpack-struct
-else ifeq ($(ARCH), XMEGA)
-   BASE_CC_FLAGS += -mmcu=$(MCU) -fshort-enums -fno-inline-small-functions -fpack-struct
-else ifeq ($(ARCH), UC3)
+else ifneq ($(findstring $(ARCH), UC3),)
    BASE_CC_FLAGS += -mpart=$(MCU:at32%=%) -masm-addr-pseudos
 endif
 BASE_CC_FLAGS += -Wall -fno-strict-aliasing -funsigned-char -funsigned-bitfields -ffunction-sections
@@ -199,11 +197,9 @@ BASE_LD_FLAGS := -lm -Wl,-Map=$(TARGET).map,--cref -Wl,--gc-sections
 ifeq ($(LINKER_RELAXATIONS), Y)
    BASE_LD_FLAGS += -Wl,--relax
 endif
-ifeq ($(ARCH), AVR8)
+ifneq ($(findstring $(ARCH), AVR8 XMEGA),)
    BASE_LD_FLAGS += -mmcu=$(MCU)
-else ifeq ($(ARCH), XMEGA)
-   BASE_LD_FLAGS += -mmcu=$(MCU)
-else ifeq ($(ARCH), UC3)
+else ifneq ($(findstring $(ARCH), UC3),)
    BASE_LD_FLAGS += -mpart=$(MCU:at32%=%) --rodata-writable --direct-data
 endif
 
@@ -332,4 +328,4 @@ $(OBJDIR)/%.o: %.S $(MAKEFILE_LIST)
 -include $(DEPENDENCY_FILES)
 
 # Phony build targets for this module
-.PHONY: $(DMBS_BUILD_TARGETS)
+.PHONY: build_begin build_end $(DMBS_BUILD_TARGETS)
