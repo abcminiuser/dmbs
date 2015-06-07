@@ -55,7 +55,7 @@ SHELL = /bin/sh
 
 
 # Current DMBS release version
-DMBS_VERSION = 0.1
+DMBS_VERSION = 0.2
 
 
 # Converts a given input to a printable output using "(None)" if no items are in the list
@@ -81,7 +81,7 @@ PRINTABLE_DMBS_PROVIDED_MACROS = $(call CONVERT_TO_PRINTABLE, $(SORTED_DMBS_PROV
 help:
 	@echo "==================================================================="
 	@echo "                       The DMBS Build System                       "
-	@echo "      By Dean Camera, 2014 { dean @ fourwalledcubicle . com }      "
+	@echo "         By Dean Camera { dean @ fourwalledcubicle . com }         "
 	@echo "==================================================================="
 	@echo "DESCRIPTION:                                                       "
 	@echo " This build system is a set of makefile modules for (GNU) Make, to "
@@ -173,4 +173,4 @@ endif
 .SUFFIXES:
 
 # Phony build targets for this module
-.PHONY: help list_modules list_targets list_mandatory list_optional list_provided list_macros
+.PHONY: $(DMBS_BUILD_TARGETS)

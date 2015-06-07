@@ -104,4 +104,4 @@ cppcheck: $(MAKEFILE_LIST)
 	cppcheck $(BASE_CPPCHECK_FLAGS) --enable=$(CPPCHECK_ENABLE) $(CPPCHECK_SUPPRESS:%=--suppress=%) $(CPPCHECK_FLAGS) $(SRC)
 
 # Phony build targets for this module
-.PHONY: cppcheck-config cppcheck
+.PHONY: $(DMBS_BUILD_TARGETS)

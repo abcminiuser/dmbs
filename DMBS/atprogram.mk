@@ -100,4 +100,4 @@ atprogram-ee: $(TARGET).elf $(MAKEFILE_LIST)
 	atprogram $(BASE_ATPROGRAM_FLAGS) program $(ATPROGRAM_EEPROM_FLAGS) --file $<
 
 # Phony build targets for this module
-.PHONY: atprogram atprogram-ee
+.PHONY: $(DMBS_BUILD_TARGETS)

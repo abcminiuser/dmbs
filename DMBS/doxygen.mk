@@ -96,4 +96,4 @@ doxygen_create: $(MAKEFILE_LIST)
 	doxygen -g $(DOXYGEN_CONF) > /dev/null
 
 # Phony build targets for this module
-.PHONY: doxygen doxygen_upgrade doxygen_create
+.PHONY: $(DMBS_BUILD_TARGETS)

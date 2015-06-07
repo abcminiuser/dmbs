@@ -92,4 +92,4 @@ dfu-ee: $(TARGET).eep $(MAKEFILE_LIST)
 	dfu-programmer $(MCU) reset
 
 # Phony build targets for this module
-.PHONY: flip flip-ee dfu dfu-ee
+.PHONY: $(DMBS_BUILD_TARGETS)

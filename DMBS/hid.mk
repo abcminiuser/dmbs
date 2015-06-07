@@ -93,4 +93,4 @@ teensy-ee: $(TARGET).hex $(MAKEFILE_LIST)
 	$(MAKE) -s -C $(DMBS_MODULE_PATH)/HID_EEPROM_Loader/ MCU=$(MCU) clean teensy
 
 # Phony build targets for this module
-.PHONY: hid hid-ee teensy teensy-ee
+.PHONY: $(DMBS_BUILD_TARGETS)

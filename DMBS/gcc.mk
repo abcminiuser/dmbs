@@ -332,4 +332,4 @@ $(OBJDIR)/%.o: %.S $(MAKEFILE_LIST)
 -include $(DEPENDENCY_FILES)
 
 # Phony build targets for this module
-.PHONY: build_begin build_end size symbol-sizes lib elf hex lss clean mostlyclean
+.PHONY: $(DMBS_BUILD_TARGETS)

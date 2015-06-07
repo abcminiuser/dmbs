@@ -83,4 +83,4 @@ avrdude-ee: $(TARGET).eep $(MAKEFILE_LIST)
 	avrdude $(BASE_AVRDUDE_FLAGS) -U eeprom:w:$< $(AVRDUDE_FLAGS)
 
 # Phony build targets for this module
-.PHONY: avrdude avrdude-ee
+.PHONY: $(DMBS_BUILD_TARGETS)
