@@ -165,6 +165,10 @@ list_macros:
 	@echo Macros Provided by the Included Modules:
 	@printf " %b" "$(PRINTABLE_DMBS_PROVIDED_MACROS:%=   - %\n)"
 
+# Debugging; "make print-VARNAME" will output the variable VARNAME's value
+print-%:
+	@printf "%s = %s" $(@:print-%=%) $($(@:print-%=%))
+
 # Disable default in-built make rules (those that are needed are explicitly
 # defined, and doing so has performance benefits when recursively building)
 ifeq ($(filter -r,$(MAKEFLAGS)),)
