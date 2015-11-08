@@ -55,7 +55,7 @@ SHELL = /bin/sh
 
 
 # Current DMBS release version
-DMBS_VERSION = 0.2
+DMBS_VERSION = 0.3
 
 
 # Converts a given input to a printable output using "(None)" if no items are in the list
