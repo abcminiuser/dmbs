@@ -2,34 +2,10 @@ DMBS - Dean's Makefile Build System
 ===================================
 
 
-Module Overview
----------------
-
-The following modules are currently included:
-
- - ATPROGRAM - Device Programming
- - AVRDUDE - Device Programming
- - CORE - DMBS Core Functionality
- - CPPCHECK - Static Code Analysis
- - DFU - Device Programming
- - DOXYGEN - Automated Source Code Documentation
- - GCC - Compiling/Assembling/Linking with GCC
- - HID - Device Programming
-
-To use a module, you will need to add the following boilerplate to your
-makefile:
-
-    # Include DMBS build script makefiles
-    DMBS_PATH   ?= ../DMBS
-
-Which is then used to indicate the location of your DMBS installation, relative
-to the current directory.
-
-
 Module: ATPROGRAM
 -----------------
 
-The ATPROGRAM module provides build targets for use with the official`
+The ATPROGRAM module provides build targets for use with the official
 `ATPROGRAM` back-end utility distributed with the free
 [Atmel Studio](http://www.atmel.com) software released by Atmel.
 
@@ -133,4 +109,3 @@ this module.
    </tr>
  </tbody>
 </table>
-
