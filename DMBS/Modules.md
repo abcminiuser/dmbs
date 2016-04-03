@@ -7,14 +7,14 @@ Modules Overview
 
 The following modules are currently included:
 
- - [ATPROGRAM](ATPROGRAM.md) - Device Programming
- - [AVRDUDE](AVRDUDE.md) - Device Programming
- - [CORE](CORE.md) - DMBS Core Functionality
- - [CPPCHECK](CPPCHECK.md) - Static Code Analysis
- - [DFU](DFU.md) - Device Programming
- - [DOXYGEN](DOXYGEN.md) - Automated Source Code Documentation
- - [GCC](GCC.md) - Compiling/Assembling/Linking with GCC
- - [HID](HID.md) - Device Programming
+ - [ATPROGRAM](atprogram.md) - Device Programming
+ - [AVRDUDE](avrdude.md) - Device Programming
+ - [CORE](core.md) - DMBS Core Functionality
+ - [CPPCHECK](cppcheck.md) - Static Code Analysis
+ - [DFU](dfu.md) - Device Programming
+ - [DOXYGEN](doxygen.md) - Automated Source Code Documentation
+ - [GCC](gcc.md) - Compiling/Assembling/Linking with GCC
+ - [HID](hid.md) - Device Programming
 
 To use a module, you will need to add the following boilerplate to your
 makefile:
