@@ -24,6 +24,10 @@ AVRDUDE_PROGRAMMER ?= jtagicemkii
 AVRDUDE_PORT       ?= usb
 AVRDUDE_FLAGS      ?=
 AVRDUDE_MEMORY     ?= flash
+AVRDUDE_HFUSE      ?=
+AVRDUDE_EFUSE      ?=
+AVRDUDE_LFUSE      ?=
+AVRDUDE_LOCK       ?=
 
 # Sanity check user supplied values
 $(foreach MANDATORY_VAR, $(DMBS_BUILD_MANDATORY_VARS), $(call ERROR_IF_UNSET, $(MANDATORY_VAR)))
@@ -47,6 +51,33 @@ avrdude: $(TARGET).hex $(MAKEFILE_LIST)
 avrdude-ee: $(TARGET).eep $(MAKEFILE_LIST)
 	@echo $(MSG_AVRDUDE_CMD) Programming device \"$(MCU)\" EEPROM using \"$(AVRDUDE_PROGRAMMER)\" on port \"$(AVRDUDE_PORT)\"
 	avrdude $(BASE_AVRDUDE_FLAGS) -U eeprom:w:$< $(AVRDUDE_FLAGS)
+
+# Programs in the target fuses using AVRDUDE
+avrdude-hfuse: $(MAKEFILE_LIST)
+	@echo $(MSG_AVRDUDE_CMD) Programming device \"$(MCU)\" fuses using \"$(AVRDUDE_PROGRAMMER)\" on port \"$(AVRDUDE_PORT)\"
+	$(call ERROR_IF_EMPTY, AVRDUDE_HFUSE)
+	avrdude $(BASE_AVRDUDE_FLAGS) -Uhfuse:w:$(AVRDUDE_HFUSE):m $(AVRDUDE_FLAGS)
+
+avrdude-efuse: $(MAKEFILE_LIST)
+	@echo $(MSG_AVRDUDE_CMD) Programming device \"$(MCU)\" fuses using \"$(AVRDUDE_PROGRAMMER)\" on port \"$(AVRDUDE_PORT)\"
+	$(call ERROR_IF_EMPTY, AVRDUDE_EFUSE)
+	avrdude $(BASE_AVRDUDE_FLAGS) -Uefuse:w:$(AVRDUDE_EFUSE):m $(AVRDUDE_FLAGS)
+
+avrdude-lfuse: $(MAKEFILE_LIST)
+	@echo $(MSG_AVRDUDE_CMD) Programming device \"$(MCU)\" fuses using \"$(AVRDUDE_PROGRAMMER)\" on port \"$(AVRDUDE_PORT)\"
+	$(call ERROR_IF_EMPTY, AVRDUDE_LFUSE)
+	avrdude $(BASE_AVRDUDE_FLAGS) -Ulfuse:w:$(AVRDUDE_LFUSE):m $(AVRDUDE_FLAGS)
+
+avrdude-lock: $(MAKEFILE_LIST)
+	@echo $(MSG_AVRDUDE_CMD) Programming device \"$(MCU)\" fuses using \"$(AVRDUDE_PROGRAMMER)\" on port \"$(AVRDUDE_PORT)\"
+	$(call ERROR_IF_EMPTY, AVRDUDE_LOCK)
+	avrdude $(BASE_AVRDUDE_FLAGS) -Ulock:w:$(AVRDUDE_LOCK):m $(AVRDUDE_FLAGS)
+
+avrdude-fuses: avrdude-hfuse avrdude-efuse avrdude-lfuse avrdude-lock
+
+avrdude-all: avrdude avrdude-fuses
+
+avrdude-all-ee: avrdude avrdude-ee avrdude-fuses
 
 # Phony build targets for this module
 .PHONY: $(DMBS_BUILD_TARGETS)
