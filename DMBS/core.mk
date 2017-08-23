@@ -1,3 +1,6 @@
+# Include Guard
+ifeq ($(findstring CORE, $(DMBS_BUILD_MODULES)),)
+
 #
 #            DMBS Build System
 #     Released into the public domain.
@@ -145,3 +148,5 @@ endif
 
 # Phony build targets for this module
 .PHONY: $(DMBS_BUILD_TARGETS)
+
+endif
