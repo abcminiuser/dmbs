@@ -9,7 +9,9 @@
 DMBS_BUILD_MODULES         += GCC
 DMBS_BUILD_TARGETS         += size symbol-sizes all lib elf bin hex lss clean mostlyclean
 DMBS_BUILD_MANDATORY_VARS  += TARGET ARCH MCU SRC
-DMBS_BUILD_OPTIONAL_VARS   += COMPILER_PATH OPTIMIZATION C_STANDARD CPP_STANDARD F_CPU C_FLAGS CPP_FLAGS ASM_FLAGS CC_FLAGS LD_FLAGS OBJDIR OBJECT_FILES DEBUG_TYPE DEBUG_LEVEL LINKER_RELAXATIONS JUMP_TABLES
+DMBS_BUILD_OPTIONAL_VARS   += COMPILER_PATH OPTIMIZATION C_STANDARD CPP_STANDARD F_CPU C_FLAGS
+DMBS_BUILD_OPTIONAL_VARS   += CPP_FLAGS ASM_FLAGS CC_FLAGS LD_FLAGS OBJDIR OBJECT_FILES DEBUG_TYPE
+DMBS_BUILD_OPTIONAL_VARS   += DEBUG_LEVEL LINKER_RELAXATIONS JUMP_TABLES LTO
 DMBS_BUILD_PROVIDED_VARS   +=
 DMBS_BUILD_PROVIDED_MACROS +=
 
@@ -33,6 +35,7 @@ DEBUG_FORMAT       ?= dwarf-2
 DEBUG_LEVEL        ?= 2
 LINKER_RELAXATIONS ?= Y
 JUMP_TABLES        ?= N
+LTO                ?= N
 
 # Sanity check user supplied values
 $(foreach MANDATORY_VAR, $(DMBS_BUILD_MANDATORY_VARS), $(call ERROR_IF_UNSET, $(MANDATORY_VAR)))
@@ -47,6 +50,7 @@ $(call ERROR_IF_EMPTY, DEBUG_FORMAT)
 $(call ERROR_IF_EMPTY, DEBUG_LEVEL)
 $(call ERROR_IF_NONBOOL, LINKER_RELAXATIONS)
 $(call ERROR_IF_NONBOOL, JUMP_TABLES)
+$(call ERROR_IF_NONBOOL, LTO)
 
 # Determine the utility prefix to use for the selected architecture
 ifeq ($(ARCH), AVR8)
@@ -125,6 +129,11 @@ ifeq ($(JUMP_TABLES), N)
    # is extracted from FLASH without using the correct ELPM instruction, resulting
    # in a pseudo-random jump target.
    BASE_CC_FLAGS += -fno-jump-tables
+endif
+ifeq ($(LTO), Y)
+   # Enable link time optimization to reduce overall flash size.
+   BASE_CC_FLAGS += -flto -fuse-linker-plugin
+   BASE_LD_FLAGS += -flto -fuse-linker-plugin
 endif
 
 # Additional language specific compiler flags
