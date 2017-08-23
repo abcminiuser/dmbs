@@ -7,8 +7,8 @@
 #
 
 DMBS_BUILD_MODULES         += AVRDUDE
-DMBS_BUILD_TARGETS         += avrdude avrdude-ee avrdude-all avrdude-all-ee
 DMBS_BUILD_TARGETS         += avrdude-hfuse avrdude-efuse avrdude-lfuse avrdude-lock avrdude-fuses
+DMBS_BUILD_TARGETS         += avrdude avrdude-ee avrdude-all avrdude-all-ee
 DMBS_BUILD_MANDATORY_VARS  += MCU TARGET
 DMBS_BUILD_OPTIONAL_VARS   += AVRDUDE_PROGRAMMER AVRDUDE_PORT AVRDUDE_FLAGS AVRDUDE_MEMORY AVRDUDE_BAUD
 DMBS_BUILD_PROVIDED_VARS   +=
@@ -57,22 +57,22 @@ avrdude-ee: $(TARGET).eep $(MAKEFILE_LIST)
 
 # Programs in the target fuses using AVRDUDE
 avrdude-hfuse: $(MAKEFILE_LIST)
-	@echo $(MSG_AVRDUDE_CMD) Programming device \"$(MCU)\" high fuses using \"$(AVRDUDE_PROGRAMMER)\" on port \"$(AVRDUDE_PORT)\"
+	@echo $(MSG_AVRDUDE_CMD) Programming device \"$(MCU)\" high fuse using \"$(AVRDUDE_PROGRAMMER)\" on port \"$(AVRDUDE_PORT)\"
 	$(call ERROR_IF_EMPTY, AVRDUDE_HFUSE)
 	avrdude $(BASE_AVRDUDE_FLAGS) -Uhfuse:w:$(AVRDUDE_HFUSE):m $(AVRDUDE_FLAGS)
 
 avrdude-efuse: $(MAKEFILE_LIST)
-	@echo $(MSG_AVRDUDE_CMD) Programming device \"$(MCU)\" extended fuses using \"$(AVRDUDE_PROGRAMMER)\" on port \"$(AVRDUDE_PORT)\"
+	@echo $(MSG_AVRDUDE_CMD) Programming device \"$(MCU)\" extended fuse using \"$(AVRDUDE_PROGRAMMER)\" on port \"$(AVRDUDE_PORT)\"
 	$(call ERROR_IF_EMPTY, AVRDUDE_EFUSE)
 	avrdude $(BASE_AVRDUDE_FLAGS) -Uefuse:w:$(AVRDUDE_EFUSE):m $(AVRDUDE_FLAGS)
 
 avrdude-lfuse: $(MAKEFILE_LIST)
-	@echo $(MSG_AVRDUDE_CMD) Programming device \"$(MCU)\" low fuses using \"$(AVRDUDE_PROGRAMMER)\" on port \"$(AVRDUDE_PORT)\"
+	@echo $(MSG_AVRDUDE_CMD) Programming device \"$(MCU)\" low fuse using \"$(AVRDUDE_PROGRAMMER)\" on port \"$(AVRDUDE_PORT)\"
 	$(call ERROR_IF_EMPTY, AVRDUDE_LFUSE)
 	avrdude $(BASE_AVRDUDE_FLAGS) -Ulfuse:w:$(AVRDUDE_LFUSE):m $(AVRDUDE_FLAGS)
 
 avrdude-lock: $(MAKEFILE_LIST)
-	@echo $(MSG_AVRDUDE_CMD) Programming device \"$(MCU)\" lock fuses using \"$(AVRDUDE_PROGRAMMER)\" on port \"$(AVRDUDE_PORT)\"
+	@echo $(MSG_AVRDUDE_CMD) Programming device \"$(MCU)\" lock bits using \"$(AVRDUDE_PROGRAMMER)\" on port \"$(AVRDUDE_PORT)\"
 	$(call ERROR_IF_EMPTY, AVRDUDE_LOCK)
 	avrdude $(BASE_AVRDUDE_FLAGS) -Ulock:w:$(AVRDUDE_LOCK):m $(AVRDUDE_FLAGS)
 
