@@ -211,27 +211,27 @@ $(SRC):
 # Compiles an input C source file and generates an assembly listing for it
 %.s: %.c $(MAKEFILE_LIST)
 	@echo $(MSG_COMPILE_CMD) Generating assembly from C file \"$(notdir $<)\"
-	$(CROSS)-gcc -S $(BASE_CC_FLAGS) $(BASE_C_FLAGS) $(CC_FLAGS) $(C_FLAGS) $< -o $@
+	$(CROSS)-gcc -S $(BASE_CC_FLAGS) $(BASE_C_FLAGS) $(CC_FLAGS) $(C_FLAGS) $($(notdir $<)_FLAGS) $< -o $@
 
 # Compiles an input C++ source file and generates an assembly listing for it
 %.s: %.cpp $(MAKEFILE_LIST)
 	@echo $(MSG_COMPILE_CMD) Generating assembly from C++ file \"$(notdir $<)\"
-	$(CROSS)-gcc -S $(BASE_CC_FLAGS) $(BASE_CPP_FLAGS) $(CC_FLAGS) $(CPP_FLAGS) $< -o $@
+	$(CROSS)-gcc -S $(BASE_CC_FLAGS) $(BASE_CPP_FLAGS) $(CC_FLAGS) $(CPP_FLAGS) $($(notdir $<)_FLAGS) $< -o $@
 
 # Compiles an input C source file and generates a linkable object file for it
 $(OBJDIR)/%.o: %.c $(MAKEFILE_LIST)
 	@echo $(MSG_COMPILE_CMD) Compiling C file \"$(notdir $<)\"
-	$(CROSS)-gcc -c $(BASE_CC_FLAGS) $(BASE_C_FLAGS) $(CC_FLAGS) $(C_FLAGS) -MMD -MP -MF $(@:%.o=%.d) $< -o $@
+	$(CROSS)-gcc -c $(BASE_CC_FLAGS) $(BASE_C_FLAGS) $(CC_FLAGS) $(C_FLAGS) $($(notdir $<)_FLAGS) -MMD -MP -MF $(@:%.o=%.d) $< -o $@
 
 # Compiles an input C++ source file and generates a linkable object file for it
 $(OBJDIR)/%.o: %.cpp $(MAKEFILE_LIST)
 	@echo $(MSG_COMPILE_CMD) Compiling C++ file \"$(notdir $<)\"
-	$(CROSS)-gcc -c $(BASE_CC_FLAGS) $(BASE_CPP_FLAGS) $(CC_FLAGS) $(CPP_FLAGS) -MMD -MP -MF $(@:%.o=%.d) $< -o $@
+	$(CROSS)-gcc -c $(BASE_CC_FLAGS) $(BASE_CPP_FLAGS) $(CC_FLAGS) $(CPP_FLAGS) $($(notdir $<)_FLAGS) -MMD -MP -MF $(@:%.o=%.d) $< -o $@
 
 # Assembles an input ASM source file and generates a linkable object file for it
 $(OBJDIR)/%.o: %.S $(MAKEFILE_LIST)
 	@echo $(MSG_ASSEMBLE_CMD) Assembling \"$(notdir $<)\"
-	$(CROSS)-gcc -c $(BASE_CC_FLAGS) $(BASE_ASM_FLAGS) $(CC_FLAGS) $(ASM_FLAGS) -MMD -MP -MF $(@:%.o=%.d) $< -o $@
+	$(CROSS)-gcc -c $(BASE_CC_FLAGS) $(BASE_ASM_FLAGS) $(CC_FLAGS) $(ASM_FLAGS) $($(notdir $<)_FLAGS) -MMD -MP -MF $(@:%.o=%.d) $< -o $@
 
 # Generates a library archive file from the user application, which can be linked into other applications
 .PRECIOUS  : $(OBJECT_FILES)
