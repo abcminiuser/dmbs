@@ -31,6 +31,10 @@ The following targets are supported by this module:
 <table>
  <tbody>
    <tr>
+    <td>avrdude-lfuse</td>
+    <td>Program the device low fuse. Requires AVRDUDE_LFUSE variable set.</td>
+   </tr>
+   <tr>
     <td>avrdude-hfuse</td>
     <td>Program the device high fuse. Requires AVRDUDE_HFUSE variable set.</td>
    </tr>
@@ -39,16 +43,12 @@ The following targets are supported by this module:
     <td>Program the device extended fuse. Requires AVRDUDE_EFUSE variable set.</td>
    </tr>
    <tr>
-    <td>avrdude-lfuse</td>
-    <td>Program the device low fuse. Requires AVRDUDE_LFUSE variable set.</td>
-   </tr>
-   <tr>
     <td>avrdude-lock</td>
     <td>Program the device lock bits. Requires AVRDUDE_LOCK variable set.</td>
    </tr>
    <tr>
     <td>avrdude-fuses</td>
-    <td>Program the device fuses (hfuse, efuse, lfuse, lock bits).</td>
+    <td>Program the device fuses (lfuse, hfuse, efuse, lock bits).</td>
    </tr>
    <tr>
     <td>avrdude</td>
