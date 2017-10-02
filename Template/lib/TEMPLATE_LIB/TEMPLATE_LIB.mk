@@ -40,8 +40,9 @@ $(foreach MANDATORY_VAR, $(DMBS_BUILD_MANDATORY_VARS), $(call ERROR_IF_UNSET, $(
 TEMPLATE_LIB_SRC := $(TEMPLATE_LIB_MODULE_PATH)/src/template_lib.c
 
 # Compiler flags and sources
-SRC			  += $(TEMPLATE_LIB_SRC)
-CC_FLAGS 	  += -I$(TEMPLATE_LIB_MODULE_PATH)/include/
+SRC			       += $(TEMPLATE_LIB_SRC)
+CC_FLAGS           += -DDMBS_MODULE_TEMPLATE_LIB
+CC_FLAGS 	       += -I$(TEMPLATE_LIB_MODULE_PATH)/include/
 
 # Phony build targets for this module
 .PHONY: $(DMBS_BUILD_TARGETS)
