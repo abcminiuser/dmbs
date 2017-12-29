@@ -49,32 +49,38 @@ endif
 # Programs in the target FLASH memory using AVRDUDE
 avrdude: $(TARGET).hex $(MAKEFILE_LIST)
 	@echo $(MSG_AVRDUDE_CMD) Programming device \"$(MCU)\" FLASH using \"$(AVRDUDE_PROGRAMMER)\" on port \"$(AVRDUDE_PORT)\"
+	test $(AVRDUDE_PORT) != usb && until [ -c $(AVRDUDE_PORT) ]; do echo "Waiting for device connection..."; sleep 1; done
 	avrdude $(BASE_AVRDUDE_FLAGS) -U $(AVRDUDE_MEMORY):w:$< $(AVRDUDE_FLAGS)
 
 # Programs in the target EEPROM memory using AVRDUDE
 avrdude-ee: $(TARGET).eep $(MAKEFILE_LIST)
 	@echo $(MSG_AVRDUDE_CMD) Programming device \"$(MCU)\" EEPROM using \"$(AVRDUDE_PROGRAMMER)\" on port \"$(AVRDUDE_PORT)\"
+	test $(AVRDUDE_PORT) != usb && until [ -c $(AVRDUDE_PORT) ]; do echo "Waiting for device connection..."; sleep 1; done
 	avrdude $(BASE_AVRDUDE_FLAGS) -U eeprom:w:$< $(AVRDUDE_FLAGS)
 
 # Programs in the target fuses using AVRDUDE
 avrdude-hfuse: $(MAKEFILE_LIST)
 	@echo $(MSG_AVRDUDE_CMD) Programming device \"$(MCU)\" high fuse using \"$(AVRDUDE_PROGRAMMER)\" on port \"$(AVRDUDE_PORT)\"
 	$(call ERROR_IF_EMPTY, AVRDUDE_HFUSE)
+	test $(AVRDUDE_PORT) != usb && until [ -c $(AVRDUDE_PORT) ]; do echo "Waiting for device connection..."; sleep 1; done
 	avrdude $(BASE_AVRDUDE_FLAGS) -Uhfuse:w:$(AVRDUDE_HFUSE):m $(AVRDUDE_FLAGS)
 
 avrdude-efuse: $(MAKEFILE_LIST)
 	@echo $(MSG_AVRDUDE_CMD) Programming device \"$(MCU)\" extended fuse using \"$(AVRDUDE_PROGRAMMER)\" on port \"$(AVRDUDE_PORT)\"
 	$(call ERROR_IF_EMPTY, AVRDUDE_EFUSE)
+	test $(AVRDUDE_PORT) != usb && until [ -c $(AVRDUDE_PORT) ]; do echo "Waiting for device connection..."; sleep 1; done
 	avrdude $(BASE_AVRDUDE_FLAGS) -Uefuse:w:$(AVRDUDE_EFUSE):m $(AVRDUDE_FLAGS)
 
 avrdude-lfuse: $(MAKEFILE_LIST)
 	@echo $(MSG_AVRDUDE_CMD) Programming device \"$(MCU)\" low fuse using \"$(AVRDUDE_PROGRAMMER)\" on port \"$(AVRDUDE_PORT)\"
 	$(call ERROR_IF_EMPTY, AVRDUDE_LFUSE)
+	test $(AVRDUDE_PORT) != usb && until [ -c $(AVRDUDE_PORT) ]; do echo "Waiting for device connection..."; sleep 1; done
 	avrdude $(BASE_AVRDUDE_FLAGS) -Ulfuse:w:$(AVRDUDE_LFUSE):m $(AVRDUDE_FLAGS)
 
 avrdude-lock: $(MAKEFILE_LIST)
 	@echo $(MSG_AVRDUDE_CMD) Programming device \"$(MCU)\" lock bits using \"$(AVRDUDE_PROGRAMMER)\" on port \"$(AVRDUDE_PORT)\"
 	$(call ERROR_IF_EMPTY, AVRDUDE_LOCK)
+	test $(AVRDUDE_PORT) != usb && until [ -c $(AVRDUDE_PORT) ]; do echo "Waiting for device connection..."; sleep 1; done
 	avrdude $(BASE_AVRDUDE_FLAGS) -Ulock:w:$(AVRDUDE_LOCK):m $(AVRDUDE_FLAGS)
 
 avrdude-fuses: avrdude-hfuse avrdude-efuse avrdude-lfuse avrdude-lock
