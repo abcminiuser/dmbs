@@ -7,7 +7,7 @@
 #
 
 # Include Guard
-ifeq ($(findstring TEMPLATE_LIB, $(DMBS_BUILD_MODULES)),)
+ifeq ($(filter TEMPLATE_LIB, $(DMBS_BUILD_MODULES)),)
 
 # Sanity check user supplied DMBS path
 ifndef DMBS_PATH
