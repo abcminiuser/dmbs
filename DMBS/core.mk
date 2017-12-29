@@ -1,5 +1,5 @@
 # Include Guard
-ifeq ($(findstring CORE, $(DMBS_BUILD_MODULES)),)
+ifeq ($(filter CORE, $(DMBS_BUILD_MODULES)),)
 
 #
 #            DMBS Build System
