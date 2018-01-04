@@ -208,6 +208,12 @@ this module.
 The changes to this module since its initial release are listed below, as of the
 DMBS version where the change was made.
 
+### 20171231
+Added `-fpack-struct` for C files only (not C++).
+Added `-fno-exceptions` and `-fno-threadsafe-statics` for C++ source files.
+Added file-specific compilation flags.
+Added `LTO` optional variable.
+
 ### 20170426
 Added `JUMP_TABLES` optional variable.
 
