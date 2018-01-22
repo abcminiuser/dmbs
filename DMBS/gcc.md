@@ -117,7 +117,7 @@ be assumed.
    </tr>
    <tr>
     <td>CPP_STANDARD</td>
-    <td>C++ language standard used when compiling C++ language source files. Default is `gnu++98` (C++98 standard with GNU extensions)./td>
+    <td>C++ language standard used when compiling C++ language source files. Default is `gnu++11` (C++11 standard with GNU extensions)./td>
    </tr>
    <tr>
     <td>F_CPU</td>
@@ -207,6 +207,9 @@ this module.
 
 The changes to this module since its initial release are listed below, as of the
 DMBS version where the change was made.
+
+### 20180122
+Changed C++ default language standard from gnu++98 to gnu++11.
 
 ### 20171231
 Added `-fpack-struct` for C files only (not C++).
