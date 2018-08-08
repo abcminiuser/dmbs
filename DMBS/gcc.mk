@@ -118,9 +118,6 @@ endif
 BASE_CC_FLAGS += -Wall -fno-strict-aliasing -funsigned-char -funsigned-bitfields -ffunction-sections
 BASE_CC_FLAGS += -I.
 BASE_CC_FLAGS += -DARCH=ARCH_$(ARCH) -DDMBS_ARCH_$(ARCH)
-ifneq ($(F_CPU),)
-   BASE_CC_FLAGS += -DF_CPU=$(F_CPU)UL
-endif
 ifeq ($(LINKER_RELAXATIONS), Y)
    BASE_CC_FLAGS += -mrelax
 endif
@@ -141,7 +138,11 @@ endif
 BASE_C_FLAGS   := -x c -O$(OPTIMIZATION) -std=$(C_STANDARD) -Wstrict-prototypes
 BASE_CPP_FLAGS := -x c++ -O$(OPTIMIZATION) -std=$(CPP_STANDARD) -fno-exceptions -fno-threadsafe-statics
 BASE_ASM_FLAGS := -x assembler-with-cpp
-
+ifneq ($(F_CPU),)
+   BASE_C_FLAGS += -DF_CPU=$(F_CPU)UL
+   BASE_CPP_FLAGS += -DF_CPU=$(F_CPU)UL
+   BASE_ASM_FLAGS += -DF_CPU=$(F_CPU)
+endif
 # Create a list of flags to pass to the linker
 BASE_LD_FLAGS := -lm -Wl,-Map=$(TARGET).map,--cref -Wl,--gc-sections
 ifeq ($(LINKER_RELAXATIONS), Y)
