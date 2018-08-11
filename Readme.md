@@ -46,6 +46,8 @@ Here's an example user makefile:
 	OPTIMIZATION = s
 	TARGET       = Template
 	SRC          = $(TARGET).c
+	BTLDR_PROJ   = N
+	BTLDR_ADDR   =
 	CC_FLAGS     =
 	LD_FLAGS     =
 

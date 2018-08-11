@@ -104,6 +104,14 @@ be assumed.
 <table>
  <tbody>
    <tr>
+    <td>BTLDR_PROJ</td>
+    <td>Boolean, if `Y` linker allocate `.text` section to hexdecimal address in `BTLDR_ADDR` variable. Default is: `N`.</td>
+   </tr>
+   <tr>
+    <td>BTLDR_ADDR</td>
+    <td>Hexdecimal address of `.bootloader` section if `BTLDR_PROJ` is `N` or `.text` section if `Y`. Default is blank (does nothing).</td>
+   </tr>
+   <tr>
     <td>COMPILER_PATH</td>
     <td>Path to the compiler to use, in case a specific compiler should be substituted for the one in the system's `PATH` variable. Default is blank (use `PATH` provided compiler).</td>
    </tr>
