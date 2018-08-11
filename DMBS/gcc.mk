@@ -128,11 +128,6 @@ ifeq ($(JUMP_TABLES), N)
    # in a pseudo-random jump target.
    BASE_CC_FLAGS += -fno-jump-tables
 endif
-ifeq ($(LTO), Y)
-   # Enable link time optimization to reduce overall flash size.
-   BASE_CC_FLAGS += -flto -fuse-linker-plugin
-   BASE_LD_FLAGS += -flto -fuse-linker-plugin
-endif
 
 # Additional language specific compiler flags
 BASE_C_FLAGS   := -x c -O$(OPTIMIZATION) -std=$(C_STANDARD) -Wstrict-prototypes
@@ -152,6 +147,11 @@ ifneq ($(findstring $(ARCH), AVR8 XMEGA),)
    BASE_LD_FLAGS += -mmcu=$(MCU)
 else ifneq ($(findstring $(ARCH), UC3),)
    BASE_LD_FLAGS += -mpart=$(MCU:at32%=%) --rodata-writable --direct-data
+endif
+ifeq ($(LTO), Y)
+   # Enable link time optimization to reduce overall flash size.
+   BASE_CC_FLAGS += -flto -fuse-linker-plugin
+   BASE_LD_FLAGS += -flto -fuse-linker-plugin
 endif
 
 # Determine flags to pass to the size utility based on its reported features (only invoke if size target required)
