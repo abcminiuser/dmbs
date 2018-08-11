@@ -47,7 +47,7 @@ Here's an example user makefile:
 	TARGET       = Template
 	SRC          = $(TARGET).c
 	BTLDR_PROJ   = N
-	BTLDR_ADDR   = 0x1C00
+	BTLDR_ADDR   =
 	CC_FLAGS     =
 	LD_FLAGS     =
 
