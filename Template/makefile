@@ -14,6 +14,8 @@ F_CPU        = 8000000
 OPTIMIZATION = s
 TARGET       = Template
 SRC          = $(TARGET).c
+BTLDR_PROJ   = N
+BTLDR_ADDR   =
 CC_FLAGS     =
 LD_FLAGS     =
 
