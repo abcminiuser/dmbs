@@ -96,6 +96,10 @@ be assumed.
 <table>
  <tbody>
    <tr>
+    <td>AVRDUDE_MCU</td>
+    <td>Override the `MCU` variable for `avrdude`. On some controllers, `avrdude` expects another spelling than the compiler needs. Default is `MCU`.</td>
+   </tr>
+   <tr>
     <td>AVRDUDE_PROGRAMMER</td>
     <td>Name of the programmer/debugger tool or bootloader to communicate with (e.g. `jtagicemkii`). Default is `jtagicemkii`.</td>
    </tr>
