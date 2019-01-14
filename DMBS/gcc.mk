@@ -253,12 +253,12 @@ $(OBJDIR)/%.o: %.S $(MAKEFILE_LIST)
 # Extracts out the loadable FLASH memory data from the project ELF file, and creates an Intel HEX format file of it
 %.hex: %.elf
 	@echo $(MSG_OBJCPY_CMD) Extracting HEX file data from \"$<\"
-	$(CROSS)-objcopy -O ihex -R .eeprom -R .fuse -R .lock -R .signature $< $@
+	$(CROSS)-objcopy -O ihex -j .text -j .data $< $@
 
 # Extracts out the loadable FLASH memory data from the project ELF file, and creates an Binary format file of it
 %.bin: %.elf
 	@echo $(MSG_OBJCPY_CMD) Extracting BIN file data from \"$<\"
-	$(CROSS)-objcopy -O binary -R .eeprom -R .fuse -R .lock -R .signature $< $@
+	$(CROSS)-objcopy -O binary -j .text -j .data $< $@
 
 # Extracts out the loadable EEPROM memory data from the project ELF file, and creates an Intel HEX format file of it
 %.eep: %.elf
