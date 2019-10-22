@@ -115,25 +115,30 @@ be assumed.
     <td>AVRDUDE_MEMORY</td>
     <td>Memory space to program when executing the `avrdude` target (e.g. 'application` for an XMEGA device). Default is `flash`.</td>
    </tr>
+   <tr>
     <td>AVRDUDE_BAUD</td>
     <td>Baud rate to use when executing the `avrdude` target (e.g. '115200` for an Optiboot device). Default is empty.</td>
    </tr>
+   <tr>
+    <td>AVRDUDE_BITCLK</td>
+    <td>ISP bit clock period in microseconds to use when executing the `avrdude` target (format: float). Must be minimum 4x longer than MCU clock period. Default is 1 us.</td>
    </tr>
+   <tr>
     <td>AVRDUDE_HFUSE</td>
     <td>Fuse setting to use when executing the `avrdude-hfuse` target (format: 0x??). Default is empty.</td>
    </tr>
-   </tr>
+   <tr>
     <td>AVRDUDE_EFUSE</td>
     <td>Fuse setting to use when executing the `avrdude-efuse` target (format: 0x??). Default is empty.</td>
    </tr>
-   </tr>
+   <tr>
     <td>AVRDUDE_LFUSE</td>
     <td>Fuse setting to use when executing the `avrdude-lfuse` target (format: 0x??). Default is empty.</td>
    </tr>
+   <tr>
+    <td>AVRDUDE_LOCK</td>
+    <td>Bit bits setting to use when executing the `avrdude-lock` target (format: 0x??). Default is empty.</td>
    </tr>
-   <td>AVRDUDE_LOCK</td>
-   <td>Bit bits setting to use when executing the `avrdude-lock` target (format: 0x??). Default is empty.</td>
-  </tr>
  </tbody>
 </table>
 
