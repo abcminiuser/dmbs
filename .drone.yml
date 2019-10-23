@@ -1,0 +1,40 @@
+kind: pipeline
+name: Build (Arch)
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: Inbuilt Help Target
+  image: abcminiuser/docker-ci-avr8-toolchain:latest-arch
+  commands:
+  - make --quiet -C Template help
+
+- name: Build Template
+  image: abcminiuser/docker-ci-avr8-toolchain:latest-arch
+  pull: always
+  commands:
+  - make --quiet -C Template all
+
+
+---
+
+kind: pipeline
+name: Build (Ubuntu)
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: Inbuilt Help Target
+  image: abcminiuser/docker-ci-avr8-toolchain:latest
+  pull: always
+  commands:
+  - make --quiet -C Template help
+
+- name: Projects
+  image: abcminiuser/docker-ci-avr8-toolchain:latest
+  commands:
+  - make --quiet -C Template all
