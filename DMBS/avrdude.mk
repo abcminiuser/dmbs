@@ -11,7 +11,7 @@ DMBS_BUILD_TARGETS         += avrdude-lfuse avrdude-hfuse avrdude-efuse avrdude-
 DMBS_BUILD_TARGETS         += avrdude avrdude-ee avrdude-all avrdude-all-ee
 DMBS_BUILD_MANDATORY_VARS  += MCU TARGET
 DMBS_BUILD_OPTIONAL_VARS   += AVRDUDE_MCU AVRDUDE_PROGRAMMER AVRDUDE_PORT AVRDUDE_FLAGS AVRDUDE_MEMORY AVRDUDE_BAUD
-DMBS_BUILD_OPTIONAL_VARS   += AVRDUDE_LFUSE AVRDUDE_HFUSE AVRDUDE_EUSE AVRDUDE_LOCK AVRDUDE_BITCLK
+DMBS_BUILD_OPTIONAL_VARS   += AVRDUDE_LFUSE AVRDUDE_HFUSE AVRDUDE_EFUSE AVRDUDE_LOCK AVRDUDE_BITCLK
 DMBS_BUILD_PROVIDED_VARS   +=
 DMBS_BUILD_PROVIDED_MACROS +=
 
@@ -31,6 +31,13 @@ AVRDUDE_EFUSE      ?=
 AVRDUDE_LOCK       ?=
 AVRDUDE_BAUD       ?=
 AVRDUDE_BITCLK     ?=
+
+# Set avrdude-efuse-target as dependency for avrdude-fuses only if defined, because not every AVR has this fuse
+ifneq ($(AVRDUDE_EFUSE),)
+  AVRDUDE_EFUSE_TARGET := avrdude-efuse
+else
+  AVRDUDE_EFUSE_TARGET :=
+endif
 
 # Sanity check user supplied values
 $(foreach MANDATORY_VAR, $(DMBS_BUILD_MANDATORY_VARS), $(call ERROR_IF_UNSET, $(MANDATORY_VAR)))
@@ -82,7 +89,7 @@ avrdude-lock: $(MAKEFILE_LIST)
 	$(call ERROR_IF_EMPTY, AVRDUDE_LOCK)
 	avrdude $(BASE_AVRDUDE_FLAGS) -Ulock:w:$(AVRDUDE_LOCK):m $(AVRDUDE_FLAGS)
 
-avrdude-fuses: avrdude-lfuse avrdude-hfuse avrdude-efuse avrdude-lock
+avrdude-fuses: avrdude-lfuse avrdude-hfuse $(AVRDUDE_EFUSE_TARGET) avrdude-lock
 
 avrdude-all: avrdude avrdude-fuses
 

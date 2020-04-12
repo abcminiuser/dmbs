@@ -48,7 +48,10 @@ The following targets are supported by this module:
    </tr>
    <tr>
     <td>avrdude-fuses</td>
-    <td>Program the device fuses (lfuse, hfuse, efuse, lock bits).</td>
+    <td>
+     Program the device fuses (lfuse, hfuse, efuse, lock bits).<br>
+     Requires AVRDUDE_LFUSE, AVRDUDE_HFUSE and AVRDUDE_LOCK variable set. AVRDUDE_EFUSE is optional.
+    </td>
    </tr>
    <tr>
     <td>avrdude</td>
@@ -175,6 +178,9 @@ this module.
 
 The changes to this module since its initial release are listed below, as of the
 DMBS version where the change was made.
+
+### 20200412
+Made `AVRDUDE_EFUSE` optional for `avrdude-fuses` because not every AVR has this fuse.
 
 ### 20171231
 Added `AVRDUDE_BAUD`, `AVRDUDE_HFUSE`, `AVRDUDE_EFUSE`, `AVRDUDE_LFUSE` and
