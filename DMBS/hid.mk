@@ -34,8 +34,7 @@ hid: $(TARGET).hex $(MAKEFILE_LIST)
 
 # Programs in the target EEPROM memory using the HID_BOOTLOADER_CLI tool (note: clears target FLASH memory)
 hid-ee: $(TARGET).eep $(MAKEFILE_LIST)
-	@echo $(MSG_OBJCPY_CMD) Converting \"$<\" to a binary file \"InputEEData.bin\"
-	avr-objcopy -I ihex -O binary $< $(DMBS_MODULE_PATH)/HID_EEPROM_Loader/InputEEData.bin
+	cp $< $(DMBS_MODULE_PATH)/HID_EEPROM_Loader/InputEEData.eep
 	@echo $(MSG_MAKE_CMD) Making EEPROM loader application for \"$<\"
 	$(MAKE) -C $(DMBS_MODULE_PATH)/HID_EEPROM_Loader/ MCU=$(MCU) clean hid
 
@@ -45,9 +44,8 @@ teensy: $(TARGET).hex $(MAKEFILE_LIST)
 	teensy_loader_cli -mmcu=$(MCU) -v $<
 
 # Programs in the target EEPROM memory using the TEENSY_BOOTLOADER_CLI tool (note: clears target FLASH memory)
-teensy-ee: $(TARGET).hex $(MAKEFILE_LIST)
-	@echo $(MSG_OBJCPY_CMD) Converting \"$<\" to a binary file \"InputEEData.bin\"
-	avr-objcopy -I ihex -O binary $< $(DMBS_MODULE_PATH)/HID_EEPROM_Loader/InputEEData.bin
+teensy-ee: $(TARGET).eep $(MAKEFILE_LIST)
+	cp $< $(DMBS_MODULE_PATH)/HID_EEPROM_Loader/InputEEData.eep
 	@echo $(MSG_MAKE_CMD) Making EEPROM loader application for \"$<\"
 	$(MAKE) -s -C $(DMBS_MODULE_PATH)/HID_EEPROM_Loader/ MCU=$(MCU) clean teensy
 
